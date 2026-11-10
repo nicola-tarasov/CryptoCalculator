@@ -93,7 +93,8 @@ def show_help():
 def exchange_rates():
     global currencies
     # Считываем наименования валют
-    base__name = "Биткойн (крипта): BTC"  # Имя из Coingecko-словаря валют. Проверь!
+    # Имя из Coingecko-словаря валют. Проверь!
+    base__name = "Биткойн (крипта): BTC"
     base0_name = base0_combobox.get()
     base1_name = base1_combobox.get()
     base2_name = base2_combobox.get()
@@ -102,28 +103,33 @@ def exchange_rates():
     if base__name in currencies:
         base__symbol = currencies[base__name]
     else:
-        base__symbol = 'btc'  # Код основной валюты. Подстраховка на любой случай!
-        base__symbol = base__symbol.lower()  # Преобразование в строчные буквы
+        # Код основной валюты. Подстраховка на любой случай!
+        base__symbol = 'btc'
+        # Преобразование в строчные буквы
+        base__symbol = base__symbol.lower()
     #
     if base0_name in currencies:
         base0_symbol = currencies[base0_name]
     else:
-        base0_symbol = base0_name
-        base0_symbol = base0_symbol.lower()  # Преобразование в строчные буквы
+        base0_symbol = base0_name# Преобразование в строчные буквы
+
+        base0_symbol = base0_symbol.lower()
     base0_currency_symbol.config(text=base0_symbol)
     #
     if base1_name in currencies:
         base1_symbol = currencies[base1_name]
     else:
         base1_symbol = base1_name
-        base1_symbol = base1_symbol.lower()  # Преобразование в строчные буквы
+        # Преобразование в строчные буквы
+        base1_symbol = base1_symbol.lower()
     base1_currency_symbol.config(text=base1_symbol)
     #
     if base2_name in currencies:
         base2_symbol = currencies[base2_name]
     else:
         base2_symbol = base2_name
-        base2_symbol = base2_symbol.lower()  # Преобразование в строчные буквы
+        # Преобразование в строчные буквы
+        base2_symbol = base2_symbol.lower()
     base2_currency_symbol.config(text=base2_symbol)
 
     print(f'УСЛОВИЯ ЗАПРОСА')
@@ -136,7 +142,8 @@ def exchange_rates():
         try:
             # Источник1
             # Запросить курсы обмена BTC на другие валюты.
-            # Одним списком доступно 95 обменных курсов биткоина (14 крипт, 1 синтетик, 78 фиатов, 2 метала):
+            # Одним списком доступно 95 обменных курсов биткоина
+            # (14 крипт, 1 синтетик, 78 фиатов, 2 метала):
             url1 = "https://api.coingecko.com/api/v3/exchange_rates"
             print(f"Источник1: {url1}")
             time1_1 = datetime.now(timezone.utc)  # Момент UTC-времени перед запросом1
@@ -146,8 +153,9 @@ def exchange_rates():
             print(f"Момент UTC-времени1_2: {time1_2}")
             d_time1 = time1_2 - time1_1  # Продолжительность запроса1
             print(f"Длительность запроса1: {d_time1}")
-            #
-            # url = "https://api.coingecko.com/api/v3/exchange_rates"  # Запросить курсы обмена BTC на другие валюты.
+
+            ## Запросить курсы обмена BTC на другие валюты.
+            # url = "https://api.coingecko.com/api/v3/exchange_rates"
             # {
             #   "rates": {
             #     "btc": {
@@ -177,7 +185,8 @@ def exchange_rates():
             # метод ничего не делает и просто возвращает управление.
             #
             data1 = response1.json()  # Метод из библиотеки Requests,
-            # который позволяет автоматически преобразовать тело HTTP-ответа (в формате JSON)
+            # который позволяет автоматически преобразовать
+            # тело HTTP-ответа (в формате JSON)
             # в структуру данных Python (например, словарь или список).
             # Это значительно упрощает работу с API,
             # так как избавляет от необходимости вручную парсить JSON-строку.
