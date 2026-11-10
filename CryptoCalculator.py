@@ -33,7 +33,7 @@ E-mail: nicola-tarasov@yandex.ru
 
 
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from tkinter import messagebox as mb
 import requests
 import json
@@ -66,6 +66,24 @@ def update_base2_currency_symbol(event):
     symbol = currencies[name]
     base2_currency_symbol.config(text=symbol)
     print(f" {symbol}: {name}")
+
+
+def show_help():
+    # Текст справочной информации
+    help_text = ("ДЛЯ СПРАВКИ\n"
+                 "\n"
+                 "Чтобы задать нужную валюту\n"
+                 "просто укажите её буквенный код\n"
+                 "либо выберайте из всплывающего списка.\n"
+                 "\n"
+                 "Основная (крипто)валюта – Биткоин (bit).\n"
+                 "\n"
+                 "Несуществующие валюты обнуляются.")
+
+
+
+    # Показываем информационное окно
+    messagebox.showinfo("Подсказка", help_text)
 
 
 def exchange_rates():
@@ -520,7 +538,7 @@ def exchange_rates():
 
 
 
-            mb.showinfo("Курсы обмена валют", (f"Текущие цены покупки / продажи валюты, включая спред: \n"
+            mb.showinfo("Курсы обмена (крипто)валют", (f"Текущие цены покупки / продажи валюты, включая спред: \n"
                                                 f" 1 {base__symbol} ⇄ {data1_base__exchange_rate:.6E} / "
                                                 f"{data2_base__exchange_rate:.6E} {base0_symbol} "
                                                 f"({base__exchange_rate_deviations}{base__exchange_rate_spread:.6f} ‰)\n"
@@ -983,7 +1001,7 @@ json_currencies = json.dumps(currencies,
 
 # Создание графического интерфейса
 window = Tk()
-window.title("Курсы обмена валют")
+window.title("Курсы обмена (крипто)валют")
 window.geometry("525x120")
 
 f0 = Frame(window)
@@ -1022,7 +1040,14 @@ base2_combobox.pack(side=LEFT)
 base2_combobox.bind("<<ComboboxSelected>>", update_base2_currency_symbol)
 # base2_combobox.bind('<KeyPress>', update_base2_currency_symbol)  # Привязываем событие нажатия на любую клавишу
 
-Button(f3, text=f"Запросите цену покупки и продажи валют на API-сайте!",
-       justify='center', command=exchange_rates).pack(side=RIGHT)
+# Создаём кнопку и задаём команду (функцию, которая выполнится при нажатии)
+# help_button = ttk.Button(f3, text="Показать справку-рекомендацию?", command=show_help)
+# help_button.pack(pady=20)
+Button(f3, text=f"Показать подсказку?",
+       justify='center', command=show_help).pack(side=LEFT, padx=10, pady=0, fill=BOTH)
+
+
+Button(f3, text=f"Запросить актуальные обменные курсы (крипто)валют?",
+       justify='center', command=exchange_rates).pack(side=LEFT, padx=30, pady=0, fill=BOTH)
 
 window.mainloop()
