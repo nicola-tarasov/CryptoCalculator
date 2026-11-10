@@ -73,12 +73,16 @@ def show_help():
     help_text = ("ДЛЯ СПРАВКИ\n"
                  "\n"
                  "Чтобы задать нужную валюту\n"
-                 "просто укажите её буквенный код\n"
-                 "либо выберайте из всплывающего списка.\n"
+                 "просто найдите во всплывающем списке\n"
+                 "либо укажите её буквенно-цифровой код.\n"
                  "\n"
                  "Основная (крипто)валюта – Биткоин (bit).\n"
                  "\n"
-                 "Несуществующие валюты обнуляются.")
+                 "Список криптовалют – это Топ-200 по капитализации.\n"
+                 "\n"
+                 "Несуществующие и некотируемые валюты обнуляются.\n"
+                 "\n"
+                 "Спред – это цена покупки за минусом цены продажи.")
 
 
 
@@ -538,7 +542,7 @@ def exchange_rates():
 
 
 
-            mb.showinfo("Курсы обмена (крипто)валют", (f"Текущие цены покупки / продажи валюты, включая спред: \n"
+            mb.showinfo("Ask – Big = Spread", (f"Текущие цены покупки / продажи валюты, включая спред: \n"
                                                 f" 1 {base__symbol} ⇄ {data1_base__exchange_rate:.6E} / "
                                                 f"{data2_base__exchange_rate:.6E} {base0_symbol} "
                                                 f"({base__exchange_rate_deviations}{base__exchange_rate_spread:.6f} ‰)\n"
@@ -1026,7 +1030,7 @@ Label(f1, text="Обменная валюта1:", justify='left', width=17).pack
 base1_currency_symbol = ttk.Label(f1, justify='center', width=5)
 base1_currency_symbol.pack(side=LEFT)
 base1_combobox = ttk.Combobox(f1, values=list(currencies.keys()), width=55, justify='left', state='normal')
-base1_combobox.set("syp")  # Устанавливаем значение по умолчанию
+base1_combobox.set("cve")  # Устанавливаем значение по умолчанию
 base1_combobox.pack(side=LEFT)
 base1_combobox.bind("<<ComboboxSelected>>", update_base1_currency_symbol)
 # base1_combobox.bind('<KeyPress>', update_base1_currency_symbol)  # Привязываем событие нажатия на любую клавишу
@@ -1035,7 +1039,7 @@ Label(f2, text="Обменная валюта2:", justify='left', width=17).pack
 base2_currency_symbol = ttk.Label(f2, justify='center', width=5)
 base2_currency_symbol.pack(side=LEFT)
 base2_combobox = ttk.Combobox(f2, values=list(currencies.keys()), width=55, justify='left', state='normal')
-base2_combobox.set("cve")  # Устанавливаем значение по умолчанию
+base2_combobox.set("Мировая финансовая свобода USD (крипта): USD1")  # Устанавливаем значение по умолчанию
 base2_combobox.pack(side=LEFT)
 base2_combobox.bind("<<ComboboxSelected>>", update_base2_currency_symbol)
 # base2_combobox.bind('<KeyPress>', update_base2_currency_symbol)  # Привязываем событие нажатия на любую клавишу
